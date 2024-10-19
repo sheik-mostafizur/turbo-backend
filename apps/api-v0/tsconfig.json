@@ -2,7 +2,18 @@
   "extends": "@repo/typescript-config/base.json",
   "compilerOptions": {
     "lib": ["ES2015"],
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "target": "ES6",
+
+    "module": "commonjs", // added for sequelize-cli
+    "moduleResolution": "node", // added for sequelize-cli
+
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"]
+    }
   },
   "exclude": ["node_modules"],
   "include": ["."]
