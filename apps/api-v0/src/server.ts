@@ -5,6 +5,11 @@ import cors from 'cors';
 import 'reflect-metadata';
 import { log } from '@repo/logger';
 import { sequelize } from '@/configs/db.config';
+import swaggerUi from 'swagger-ui-express';
+import yaml from 'yamljs';
+import path from 'path';
+
+const swaggerDocument = yaml.load(path.join(__dirname, 'swagger.yaml'));
 
 export const createServer = async (): Promise<Express> => {
   try {
@@ -31,6 +36,8 @@ export const createServer = async (): Promise<Express> => {
   app.get('/status', (_, res) => {
     return res.json({ ok: true });
   });
+
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
   return app;
 };
